@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - Food Donation App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Donate Food</h1>
+            <nav>
+                <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                <a class="nav-link" href="{{ url_for('donate') }}">Donate</a>
+                <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </nav>
+        </header>
+        <main>
+            <form action="{{ url_for('donate') }}" method="post" enctype="multipart/form-data" class="donation-form">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class="flash-messages">
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                
+                <label for="food_item">Food Item:</label>
+                <input type="text" id="food_item" name="food_item" required>
+                
+                <label for="quantity">Quantity:</label>
+                <input type="text" id="quantity" name="quantity" required>
+                
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required>
+                
+                
+                <button type="submit">Submit Donation</button>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
